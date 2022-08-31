@@ -6,18 +6,25 @@ const randomColor3 = document.querySelector('.random-color3');
 const pixelBoard = document.getElementById('pixel-board');
 const clearButton = document.getElementById('clear-board');
 let storedColors = JSON.parse(localStorage.getItem('colorPalette'));
-allColors[0].style.backgroundColor = 'black'
+let pixelColorsRestored = JSON.parse(localStorage.getItem('pixelBoard'))
 
-if (storedColors != null){
+allColors[0].style.backgroundColor = 'black';
+allColors[1].style.backgroundColor = 'blue';
+allColors[2].style.backgroundColor = 'green';
+allColors[3].style.backgroundColor = 'yellow';
+if (storedColors != null) {
     randomColor1.style.backgroundColor = storedColors.color1;
     randomColor2.style.backgroundColor = storedColors.color2;
     randomColor3.style.backgroundColor = storedColors.color3;
 }
 
+
+
 randomizerButton.addEventListener('click', randomizeColors);
-clearButton.addEventListener('click', clearBoard)
-for(let index = 0; index < allColors.length; index += 1){
-    allColors[index].addEventListener('click', changeSelected)
+clearButton.addEventListener('click', clearBoard);
+
+for(let index = 0; index < allColors.length; index += 1) {
+    allColors[index].addEventListener('click', changeSelected);
 }
 
 for (let index = 0; index <=4; index += 1){
@@ -32,8 +39,17 @@ for (let index = 0; index <=4; index += 1){
 }
 
 const pixel = document.getElementsByClassName('pixel');
+
+if(pixelColorsRestored != null){
+    for(index = 0; index < pixel.length; index += 1){
+        pixel[index].style.backgroundColor = pixelColorsRestored[index]
+    }
+}
+
+
 for(index =0; index < pixel.length; index += 1) {
-    pixel[index].addEventListener('click', paintPixelWithSelected)
+    pixel[index].addEventListener('click', paintPixelWithSelected);
+    pixel[index].addEventListener('click', storePixelsInLocal);
 }
 function randomRGB(){
     let randomRGBValue1 = Math.floor(Math.random() * 255);
@@ -89,4 +105,14 @@ function clearBoard(){
     for(let index = 0; index < pixel.length; index += 1){
     pixel[index].style.backgroundColor = 'white'
     }
+}
+
+function storePixelsInLocal(){
+    let pixelColorArr = [];
+    for (index = 0; index < pixel.length; index += 1){
+        let currentCollor = pixel[index].style.backgroundColor
+        pixelColorArr.push(currentCollor)
+    }
+    let pixelColorObj = JSON.stringify(pixelColorArr);
+    localStorage.setItem('pixelBoard', pixelColorObj);
 }
