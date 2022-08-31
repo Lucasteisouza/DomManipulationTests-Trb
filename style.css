@@ -6,7 +6,7 @@
 #color-palette{
     text-align: center;
     width: 100%;
-    height: 100px;
+    height: 52px;
 }
 
 .black{
@@ -14,15 +14,15 @@ background-color: black;
 
 }
 
-.blue{
+.random-color1{
 background-color: blue;
 }
 
-.green{
+.random-color2{
 background-color: green;
 }
 
-.yellow{
+.random-color3{
 background-color: yellow;
 }
 
@@ -31,4 +31,10 @@ border: 1px black solid;
 display: inline-block;
 width: 50px;
 height: 50px;
+}
+
+#rdm-color-btn{
+    vertical-align: top;
+    display: inline-block;
+    height: 35px;
 }
