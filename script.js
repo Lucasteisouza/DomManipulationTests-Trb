@@ -1,20 +1,32 @@
-const randomizerButton = document.getElementById('button-random-color')
-const randomColor1 = document.querySelector('.random-color1')
-const randomColor2 = document.querySelector('.random-color2')
-const randomColor3 = document.querySelector('.random-color3')
 
-let storedColors = JSON.parse(localStorage.getItem('colorPalette'))
+const randomizerButton = document.getElementById('button-random-color');
+const randomColor1 = document.querySelector('.random-color1');
+const randomColor2 = document.querySelector('.random-color2');
+const randomColor3 = document.querySelector('.random-color3');
+const pixelBoard = document.getElementById('pixel-board');
+let storedColors = JSON.parse(localStorage.getItem('colorPalette'));
 if (storedColors != null){
     randomColor1.style.backgroundColor = storedColors.color1;
     randomColor2.style.backgroundColor = storedColors.color2;
     randomColor3.style.backgroundColor = storedColors.color3;
 }
-randomizerButton.addEventListener('click', randomizeColors)
+randomizerButton.addEventListener('click', randomizeColors);
+
+for (let index = 0; index <=4; index += 1){
+    const pixelLine = document.createElement('div');
+    pixelLine.className = 'pixelLine';
+    pixelBoard.appendChild (pixelLine);
+    for (let index2 = 0; index2 <=4; index2 += 1){
+        const pixel = document.createElement('div');
+        pixel.className = 'pixel';
+        pixelLine.appendChild (pixel);
+    }
+}
 
 function randomRGB(){
-    let randomRGBValue1 = Math.floor(Math.random() * 255)
-    let randomRGBValue2 = Math.floor(Math.random() * 255)
-    let randomRGBValue3 = Math.floor(Math.random() * 255)
+    let randomRGBValue1 = Math.floor(Math.random() * 255);
+    let randomRGBValue2 = Math.floor(Math.random() * 255);
+    let randomRGBValue3 = Math.floor(Math.random() * 255);
     let RGBColor = 'rgb(' + randomRGBValue1 + ', ' + randomRGBValue2 + ', ' + randomRGBValue3 + ')';
     return RGBColor;
 }
