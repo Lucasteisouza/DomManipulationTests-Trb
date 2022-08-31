@@ -57,5 +57,13 @@ height: 50px;
     border: 1px solid black;
     background-color: white;
 }
+#clear-container{
+    margin: 20px 
+}
+#clear-board{
+    text-align: center;
+    margin-left: 580px;
+
+}
 
 

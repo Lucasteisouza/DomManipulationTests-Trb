@@ -4,13 +4,21 @@ const randomColor1 = document.querySelector('.random-color1');
 const randomColor2 = document.querySelector('.random-color2');
 const randomColor3 = document.querySelector('.random-color3');
 const pixelBoard = document.getElementById('pixel-board');
+const clearButton = document.getElementById('clear-board');
 let storedColors = JSON.parse(localStorage.getItem('colorPalette'));
+allColors[0].style.backgroundColor = 'black'
+
 if (storedColors != null){
     randomColor1.style.backgroundColor = storedColors.color1;
     randomColor2.style.backgroundColor = storedColors.color2;
     randomColor3.style.backgroundColor = storedColors.color3;
 }
+
 randomizerButton.addEventListener('click', randomizeColors);
+clearButton.addEventListener('click', clearBoard)
+for(let index = 0; index < allColors.length; index += 1){
+    allColors[index].addEventListener('click', changeSelected)
+}
 
 for (let index = 0; index <=4; index += 1){
     const pixelLine = document.createElement('div');
@@ -23,6 +31,10 @@ for (let index = 0; index <=4; index += 1){
     }
 }
 
+const pixel = document.getElementsByClassName('pixel');
+for(index =0; index < pixel.length; index += 1) {
+    pixel[index].addEventListener('click', paintPixelWithSelected)
+}
 function randomRGB(){
     let randomRGBValue1 = Math.floor(Math.random() * 255);
     let randomRGBValue2 = Math.floor(Math.random() * 255);
@@ -49,9 +61,7 @@ function saveColors(){
     localStorage.setItem('colorPalette', savedBgColors)
 }
 
-for(let index = 0; index < allColors.length; index += 1){
-    allColors[index].addEventListener('click', changeSelected)
-}
+
 
 function selectionRemover(){
     for (let index = 0; index < allColors.length; index += 1){
@@ -67,6 +77,16 @@ function selectionRemover(){
 function changeSelected(event){
     selectionRemover();
     event.target.classList.add('selected')
+}
 
-    
+function paintPixelWithSelected(event){
+    const selected = document.getElementsByClassName('selected');
+    let selectedColor = selected[0].style.backgroundColor;
+    event.target.style.backgroundColor = selectedColor
+}
+
+function clearBoard(){
+    for(let index = 0; index < pixel.length; index += 1){
+    pixel[index].style.backgroundColor = 'white'
+    }
 }
