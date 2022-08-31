@@ -1,4 +1,4 @@
-
+const allColors = document.getElementsByClassName('color');
 const randomizerButton = document.getElementById('button-random-color');
 const randomColor1 = document.querySelector('.random-color1');
 const randomColor2 = document.querySelector('.random-color2');
@@ -47,4 +47,26 @@ function saveColors(){
         'color3': bg3}
     let savedBgColors = JSON.stringify(colorsObj);
     localStorage.setItem('colorPalette', savedBgColors)
+}
+
+for(let index = 0; index < allColors.length; index += 1){
+    allColors[index].addEventListener('click', changeSelected)
+}
+
+function selectionRemover(){
+    for (let index = 0; index < allColors.length; index += 1){
+        let classLista = allColors[index].classList;
+        for (let index2 =0; index2 < classLista.length; index2 += 1){
+            if(classLista[index2] === 'selected'){
+                allColors[index].classList.remove('selected');
+            }
+        }    
+    }    
+}
+
+function changeSelected(event){
+    selectionRemover();
+    event.target.classList.add('selected')
+
+    
 }
