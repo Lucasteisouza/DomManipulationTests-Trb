@@ -40,10 +40,8 @@ height: 50px;
 }
 
 #pixel-board{
-    height: 250px;
-    width: 250px;
     text-align: center;
-    margin: 20px 505.5px;
+    margin: auto;
     background-color: white;
 }
 .pixelLine{

@@ -124,7 +124,36 @@ function storePixelsInLocal(){
 function newBoard(){
     if(sizeInput.value == ''){
         window.alert('Board inválido!')
-    }else{
+    }else if (parseInt (sizeInput.value) < 5){
+        pixelBoard.innerHTML= ''
+        let newSize = 5;
+        for (let index = 0; index < newSize; index += 1){
+            const pixelLine = document.createElement('div');
+            pixelLine.className = 'pixelLine';
+            pixelBoard.appendChild (pixelLine);
+            for (let index2 = 0; index2 < newSize; index2 += 1){
+                const pixel = document.createElement('div');
+                pixel.className = 'pixel';
+                pixelLine.appendChild (pixel);
+            }
+        }
+        localStorage.removeItem('pixelBoard');
+    }else if (parseInt(sizeInput.value) > 50){
+        pixelBoard.innerHTML= ''
+        let newSize = 50;
+        for (let index = 0; index < newSize; index += 1){
+            const pixelLine = document.createElement('div');
+            pixelLine.className = 'pixelLine';
+            pixelBoard.appendChild (pixelLine);
+            for (let index2 = 0; index2 < newSize; index2 += 1){
+                const pixel = document.createElement('div');
+                pixel.className = 'pixel';
+                pixelLine.appendChild (pixel);
+            }
+        }
+        localStorage.removeItem('pixelBoard');
+    }
+    else{
         pixelBoard.innerHTML= ''
         let newSize = parseInt(sizeInput.value)
         for (let index = 0; index < newSize; index += 1){
