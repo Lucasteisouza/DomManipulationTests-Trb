@@ -1,10 +1,13 @@
 const allColors = document.getElementsByClassName('color');
+const body = document.getElementById('body')
 const randomizerButton = document.getElementById('button-random-color');
 const randomColor1 = document.querySelector('.random-color1');
 const randomColor2 = document.querySelector('.random-color2');
 const randomColor3 = document.querySelector('.random-color3');
 const pixelBoard = document.getElementById('pixel-board');
 const clearButton = document.getElementById('clear-board');
+const VQVButton = document.getElementById('generate-board');
+const sizeInput = document.getElementById('board-size');
 let storedColors = JSON.parse(localStorage.getItem('colorPalette'));
 let pixelColorsRestored = JSON.parse(localStorage.getItem('pixelBoard'))
 
@@ -19,13 +22,14 @@ if (storedColors != null) {
 }
 
 
-
+VQVButton.addEventListener('click', newBoard);
 randomizerButton.addEventListener('click', randomizeColors);
 clearButton.addEventListener('click', clearBoard);
 
 for(let index = 0; index < allColors.length; index += 1) {
     allColors[index].addEventListener('click', changeSelected);
 }
+
 
 for (let index = 0; index <=4; index += 1){
     const pixelLine = document.createElement('div');
@@ -115,4 +119,24 @@ function storePixelsInLocal(){
     }
     let pixelColorObj = JSON.stringify(pixelColorArr);
     localStorage.setItem('pixelBoard', pixelColorObj);
+}
+
+function newBoard(){
+    if(sizeInput.value == ''){
+        window.alert('Board inválido!')
+    }else{
+        pixelBoard.innerHTML= ''
+        let newSize = parseInt(sizeInput.value)
+        for (let index = 0; index < newSize; index += 1){
+            const pixelLine = document.createElement('div');
+            pixelLine.className = 'pixelLine';
+            pixelBoard.appendChild (pixelLine);
+            for (let index2 = 0; index2 < newSize; index2 += 1){
+                const pixel = document.createElement('div');
+                pixel.className = 'pixel';
+                pixelLine.appendChild (pixel);
+            }
+        }
+        localStorage.removeItem('pixelBoard');
+    }    
 }
