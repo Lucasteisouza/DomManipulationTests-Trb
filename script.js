@@ -10,6 +10,7 @@ const VQVButton = document.getElementById('generate-board');
 const sizeInput = document.getElementById('board-size');
 let storedColors = JSON.parse(localStorage.getItem('colorPalette'));
 let pixelColorsRestored = JSON.parse(localStorage.getItem('pixelBoard'))
+let boardSizeRestored = localStorage.getItem('boardSize');
 
 allColors[0].style.backgroundColor = 'black';
 allColors[1].style.backgroundColor = 'blue';
@@ -19,6 +20,31 @@ if (storedColors != null) {
     randomColor1.style.backgroundColor = storedColors.color1;
     randomColor2.style.backgroundColor = storedColors.color2;
     randomColor3.style.backgroundColor = storedColors.color3;
+}
+
+if (boardSizeRestored != null){
+    let newSize = boardSizeRestored;
+    for (let index = 0; index < newSize; index += 1){
+        const pixelLine = document.createElement('div');
+        pixelLine.className = 'pixelLine';
+        pixelBoard.appendChild (pixelLine);
+        for (let index2 = 0; index2 < newSize; index2 += 1){
+            const pixel = document.createElement('div');
+            pixel.className = 'pixel';
+            pixelLine.appendChild (pixel);
+        }
+    }
+}else{
+    for (let index = 0; index <=4; index += 1){
+        const pixelLine = document.createElement('div');
+        pixelLine.className = 'pixelLine';
+        pixelBoard.appendChild (pixelLine);
+        for (let index2 = 0; index2 <=4; index2 += 1){
+            const pixel = document.createElement('div');
+            pixel.className = 'pixel';
+            pixelLine.appendChild (pixel);
+        }
+    }
 }
 
 
@@ -31,16 +57,16 @@ for(let index = 0; index < allColors.length; index += 1) {
 }
 
 
-for (let index = 0; index <=4; index += 1){
-    const pixelLine = document.createElement('div');
-    pixelLine.className = 'pixelLine';
-    pixelBoard.appendChild (pixelLine);
-    for (let index2 = 0; index2 <=4; index2 += 1){
-        const pixel = document.createElement('div');
-        pixel.className = 'pixel';
-        pixelLine.appendChild (pixel);
-    }
-}
+// for (let index = 0; index <=4; index += 1){
+//     const pixelLine = document.createElement('div');
+//     pixelLine.className = 'pixelLine';
+//     pixelBoard.appendChild (pixelLine);
+//     for (let index2 = 0; index2 <=4; index2 += 1){
+//         const pixel = document.createElement('div');
+//         pixel.className = 'pixel';
+//         pixelLine.appendChild (pixel);
+//     }
+// }
 
 const pixel = document.getElementsByClassName('pixel');
 
@@ -137,7 +163,10 @@ function newBoard(){
                 pixelLine.appendChild (pixel);
             }
         }
+        const pixelLines = document.getElementsByClassName('pixelLine')
+        let pixelLinesStringed = JSON.stringify(pixelLines)
         localStorage.removeItem('pixelBoard');
+        localStorage.setItem('boardSize', pixelLines.length)
     }else if (parseInt(sizeInput.value) > 50){
         pixelBoard.innerHTML= ''
         let newSize = 50;
@@ -151,7 +180,9 @@ function newBoard(){
                 pixelLine.appendChild (pixel);
             }
         }
+        const pixelLines = document.getElementsByClassName('pixelLine')
         localStorage.removeItem('pixelBoard');
+        localStorage.setItem('boardSize', pixelLines.length)
     }
     else{
         pixelBoard.innerHTML= ''
@@ -166,6 +197,8 @@ function newBoard(){
                 pixelLine.appendChild (pixel);
             }
         }
+        const pixelLines = document.getElementsByClassName('pixelLine')
         localStorage.removeItem('pixelBoard');
+        localStorage.setItem('boardSize', pixelLines.length)
     }    
 }
